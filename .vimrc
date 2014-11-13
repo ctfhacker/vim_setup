@@ -21,7 +21,7 @@ au BufNewFile *.py,*.pyw,*.c,*.h set fileformat=unix
 let python_highlight_all=1
 syntax on
 
-match ErrorMsg '\%>80v.\+'
+au BufRead,BufNewFile *.py,*.py match ErrorMsg '\%>80v.\+'
 
 " This rewires n and N to do the highlighing...
 nnoremap <silent> n nzz:call HLNext(0.2)<cr>
