@@ -3,6 +3,7 @@
 	email = cld251@gmail.com
 [alias]
     d = diff --word-diff
+    s = status -s
     co = checkout
     ec = config --global -e
     up = !git pull --rebase --prune $@ && git submodule update --init --recursive
@@ -18,3 +19,5 @@
 
 [color]
 	ui = true
+[core]
+	editor = vim
