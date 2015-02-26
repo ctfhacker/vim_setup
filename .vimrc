@@ -3,11 +3,53 @@ syntax enable
 set background=dark
 colorscheme solarized
 
+set noswapfile
+set nobackup
+
+set lines=80
+set columns=130
+
 inoremap jj <ESC>
 inoremap jk <ESC>
 
+noremap j gj
+noremap k gk
+noremap gj j
+noremap gk k
+
+nnoremap <left> :wa!<cr>:tabp<cr>
+nnoremap <right> :wa!<cr>:tabn<cr>
+
+noremap <F1> :checktime
+inoremap <F1> jj:checktime<cr>
+
+inoremap <ESC> <nop>
+
 nnoremap ; :
 nnoremap : ;
+
+set ruler
+set cmdheight=2
+set backspace=eol,start,indent
+set whichwrap+=<,>,h,l
+
+set textwidth=79
+set shiftwidth=4
+set tabstop=4
+set expandtab
+set softtabstop=4
+set shiftround
+set smarttab
+set smartindent
+
+set smartcase
+set incsearch
+set ignorecase
+set hlsearch
+set showmatch
+
+set laststatus=2
+set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l
 
 highlight BadWhitespace ctermbg=red guibg=red
 
@@ -27,11 +69,6 @@ au BufRead,BufNewFile *.py,*.py match ErrorMsg '\%>80v.\+'
 nnoremap <silent> n nzz:call HLNext(0.2)<cr>
 nnoremap <silent> N Nzz:call HLNext(0.2)<cr>
 
-" Better tabs
-set expandtab       " tabs are converted to spaces
-set tabstop=4       " numbers of spaces of tab character
-set shiftwidth=4    " numbers of spaces to (auto)indent
-
 " Treat JSON files like javascript
 au BufNewFile,BufRead *.json set ft=javascript
 
@@ -46,3 +83,26 @@ function! HLNext (blinktime)
 	call matchdelete(ring)
 	redraw
 endfunction
+
+augroup line_return
+    au!
+        au BufReadPost *
+        \ if line("'\"") > 0 && line("'\"") <= line("$") |
+        \   execute 'normal! g`"zvzz' | 
+        \ endif
+augroup END
+
+augroup cline
+    au!
+    au WinLeave,InsertEnter * set nocursorline
+    au WinEnter,InsertLeave * set cursorline
+augroup END
+
+function! HasPaste()
+    if &paste
+        return 'PASTE MODE '
+    en
+    return ''
+endfunction
+
+highlight WhiteOnRed guifg=white guibg=red
