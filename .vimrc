@@ -49,6 +49,8 @@ set ignorecase
 set hlsearch
 set showmatch
 
+set list listchars=tab:>-,trail:.,extends:>
+
 set laststatus=2
 set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l
 
