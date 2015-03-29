@@ -7,9 +7,6 @@ set nu
 set noswapfile
 set nobackup
 
-set lines=80
-set columns=130
-
 inoremap jj <ESC>
 inoremap jk <ESC>
 
