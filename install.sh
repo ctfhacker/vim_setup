@@ -55,3 +55,8 @@ pip3 install pycparser
 
 # Install tmux.conf
 cp tmux.conf ~/.tmux.conf
+
+# Install terminator and config
+sudo apt-get install terminator
+mkdir -p ~/.config/terminator
+cp terminator-config ~/.config/terminator/config
