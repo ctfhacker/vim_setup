@@ -31,7 +31,6 @@ set cmdheight=2
 set backspace=eol,start,indent
 set whichwrap+=<,>,h,l
 
-set textwidth=79
 set shiftwidth=4
 set tabstop=4
 set expandtab
@@ -73,15 +72,15 @@ nnoremap <silent> N Nzz:call HLNext(0.2)<cr>
 au BufNewFile,BufRead *.json set ft=javascript
 
 function! HLNext (blinktime)
-	highlight WhiteOnRed ctermfg=white ctermbg=red
-	let [bufnum, lnum, col, off] = getpos('.')
-	let matchlen = strlen(matchstr(strpart(getline('.'),col-1),@/))
-	let target_pat = '\c\%#'.@/
-	let ring = matchadd('WhiteOnRed', target_pat, 101)
-	redraw
-	exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
-	call matchdelete(ring)
-	redraw
+    highlight WhiteOnRed ctermfg=white ctermbg=red
+    let [bufnum, lnum, col, off] = getpos('.')
+    let matchlen = strlen(matchstr(strpart(getline('.'),col-1),@/))
+    let target_pat = '\c\%#'.@/
+    let ring = matchadd('WhiteOnRed', target_pat, 101)
+    redraw
+    exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
+    call matchdelete(ring)
+    redraw
 endfunction
 
 augroup line_return
